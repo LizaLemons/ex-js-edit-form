@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Test JS Form</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+	<div class="container">
+		<form action="/my-handling-form-page" method="post">
+			
+			<br>
+			<br>
+
+		<!-- ///////////////  Question #1  /////////////////// -->
+			<div>
+				
+				<!-- #######  Question label ######## -->
+				<div id="question-label">
+					<label for="question-label">Question label:</label>
+					<br>
+					<textarea id="msg"></textarea>
+					<br>
+					<button type="button" class="btn btn-default" id="question-label-submit">Submit</button>
+				</div>
+
+				
+				<br>
+				<br>
+				<br>
+
+				<!-- #######  Question Type ######## -->
+
+				<!-- Label -->
+				<div id="question-type" class="hide">
+					<div>
+						<label for="select-city">Select a question type:</label>
+					</div>
+					
+					
+					<!-- Select question type -->
+					<div>
+						<radiogroup>
+							<input type="radio" name="question-type" value="dropdown" id="dropdown-selected"> Dropdown</input>
+							<br>
+							<input type="radio" name="question-type" value="text-box" id="text-area-selected"> Text Box</input>
+							<br>
+							<input type="radio" name="question-type" value="radio-buttons" id="radio-selected"> Radio Buttons</input>
+							<br>
+							<input type="radio" name="question-type" value="checkboxes" id="checkbox-selected"> Checkboxes</input>
+						</radiogroup>
+					</div>
+				</div>
+				
+
+				<!-- Selected type of question -->
+				<br>
+
+				<!-- Dropdown -->
+				
+				<!-- Dropdown | Select number of options -->
+				<div id="dropdown-type" class="hide">
+					<p>Dropdown:</p>
+					<select id="dropdown-num-selected">
+					  <option disabled selected>Select number of options</option>
+					  <option value="1">1</option>
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					</select>
+					<br>
+					<button type="button" class="btn btn-default" id="dropdown-num-options-submit">Submit</button><br>
+				</div>
+
+
+
+				<br>
+				
+				<!-- Text area -->
+				<div id="text-area-type" class="hide">
+					<p>Text box:</p>
+					<textarea id="msg"></textarea>
+				</div>
+
+				<br>
+				
+				<!-- Radio buttons -->
+				<div id="radio-type" class="hide">
+					<p>Radio buttons:</p>
+					<radiogroup>
+						<input type="radio" name="sex" value="male"> Male</input>
+						<br>
+						<input type="radio" name="sex" value="female"> Female</input>
+					</radiogroup>
+				</div>
+				
+				<br>
+
+				<!-- Checkboxes -->
+				<div id="checkbox-type" class="hide">
+					<p>Checkboxes:</p>
+					<input type="checkbox" name="vehicle" value="Bike"> I have a bike </input>
+					<br>
+					<input type="checkbox" name="vehicle" value="Car"> I have a car </input>
+				</div>
+
+
+			</div>
+		</form> 
+	</div>
+
+
+
+
+
+	<!-- JavaScripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="home.js"></script>
+</body>
+</html>
