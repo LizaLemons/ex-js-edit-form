@@ -18,4 +18,6 @@ Steps:
 Question type = Dropdown:
 - User selects number of options that will be in dropdown
 - Display this amount of text boxes
-- Save inputs as dropdown options 
+	- Give each text box unique ID
+- Capture inputs of text boxes
+- Set this text as dropdown options

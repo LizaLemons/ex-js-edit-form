@@ -6,11 +6,15 @@ $(document).ready(function(){
 // Hide all elements except div#question-label
 $('.hide').hide();
 
+// Capture question name upon submit
+$('#question-label-submit').on('click', function() {
+	var questionName = $('#question-name-text').val();
+});
+
 // Choose question input type 
 $('#question-label-submit').on('click', function() {
-	console.log('oh hai');
 	$('#question-type').removeClass('hide');
-	$('#question-type').show("slow"); 
+	$('#question-type').show("slow");
 });
 
 // Show selected input type / hide other options
@@ -58,14 +62,20 @@ $('#checkbox-selected').on('click', function() {
 $('#dropdown-num-options-submit').on('click', function() {
 	// remove any already-created text boxes first
 	$('.dynamic-text-box').remove();
-
+	// find the num selected
 	var drpdwnNumOptions = $("#dropdown-num-selected :selected").val();
 	console.log(drpdwnNumOptions);
-
-	// append the amount of text boxes = drpdwnNumOptions
+	// append the amount of text boxes = drpdwnNumOptions and a submit button
 	for (var i = 0; i < drpdwnNumOptions; i++) {
-		$('#dropdown-type').append("<textarea class='dynamic-text-box' id='msg'></textarea><br class='dynamic-text-box' />");	
+		$('#dropdown-type').append("<textarea class='dynamic-text-box' id='" + i + "'></textarea><br class='dynamic-text-box' />");
 	};
+	$('#dropdown-type').append("<button type='button' class='btn btn-default' id='dropdown-options-text-submit'>Submit</button>");
+});
+
+// Capture answers for dropdown upon click of submit button
+$('#dropdown-options-text-submit').on('click', function() {
+	// Capture vals of text boxes
+	// Set them as options for the dropdown
 });
 
 
