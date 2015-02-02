@@ -65,11 +65,12 @@ $('#dropdown-num-options-submit').on('click', function() {
 	// find the num selected
 	var drpdwnNumOptions = $("#dropdown-num-selected :selected").val();
 	console.log(drpdwnNumOptions);
-	// append the amount of text boxes = drpdwnNumOptions and a submit button
+	// append the amount of text boxes (with ID) and a submit button
 	for (var i = 0; i < drpdwnNumOptions; i++) {
-		$('#dropdown-type').append("<textarea class='dynamic-text-box' id='" + i + "'></textarea><br class='dynamic-text-box' />");
-	};
-	$('#dropdown-type').append("<button type='button' class='btn btn-default' id='dropdown-options-text-submit'>Submit</button>");
+		$('#dropdown-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
+	}
+
+	//$('#dropdown-type').append("<button type='button' class='btn btn-default' id='dropdown-options-text-submit'>Submit</button>");
 });
 
 // Capture answers for dropdown upon click of submit button
