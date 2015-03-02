@@ -4,7 +4,8 @@ Questions[0] = {}; 		// Rails ==> Question.create() or Question.all.first
 
 $(document).ready(function(){
 
-
+var firebase = new Firebase('scorching-torch-8159.firebaseapp.com');
+var testQuestion = [];
 
 // Hide all elements except div#question-label
 $('.hide').hide();
