@@ -122,6 +122,35 @@ $('#radio-num-options-submit').on('click', function() {
 	
 });
 
+// Checkbox buttons: fill in options 
+$('#checkbox-num-options-submit').on('click', function() {
+	// remove any already-created text boxes first
+	$('.dynamic-text-box').remove();
+	// find the num selected
+	var checkboxNumOptions = $("#checkbox-num-selected :selected").val();
+	Questions[0].checkboxOptionsNum  = checkboxNumOptions;
+	Questions[0].checkboxOptions = [];
+	console.log(checkboxNumOptions);
+	// append the amount of text boxes (with ID) and a submit button
+	for (var i = 0; i < checkboxNumOptions; i++) {
+		$('#checkbox-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
+	}
+
+	$('#checkbox-type').append("<button type='button' class='btn btn-default' id='checkbox-options-text-submit'>Submit</button>");
+
+	// Capture answers for checkbox upon click of submit button
+	$('#checkbox-options-text-submit').on('click', function() {
+		// Capture vals of text boxes
+		// Set them as options for the checkbox
+		$('.dynamic-text-box').each(function(i, el) {
+			Questions[0].checkboxOptions.push($(el).val());
+		});
+
+		generateForm(Questions[0]);
+	});
+	
+});
+
 
 }); //end document ready fxn
 
@@ -148,18 +177,34 @@ function generateForm(data) {
 
 	} else if (data.questionType === 'checkbox') {
 
-	} else if (data.questionType === 'radio') {
 		questionString += '<p>' + data.questionName + '</p>';
-		questionString += '<select id="dynamic-last-select">'
 		
-		for (var i = 0; i < data.radioOptions.length; i++) {
-			questionString += '<option val="'+data.radioOptions[i]+'">' + data.radioOptions[i] + '</option>';
+		for (var i = 0; i < data.checkboxOptions.length; i++) {
+			questionString += '<input class="dynamic-input" type="checkbox" value="'+data.checkboxOptions[i]+'"> ' + data.checkboxOptions[i] + '</input><br/>';
 		}
 
 		questionString += '</select><br><br><button id="dynamic-last-button">Done</button>';
 
 		$('body').on('click', '#dynamic-last-button', function(){
-			alert('you selected ' + $("#dynamic-last-select :selected").val());
+			var boxes = $("input[type='checkbox'].dynamic-input:checked");
+			result = [];
+			for (var i = 0; i < boxes.length; i++) {
+				result.push(boxes[i].value);
+			};
+			alert('you selected ' + result.join(', '));
+		});
+
+	} else if (data.questionType === 'radio') {
+		questionString += '<p>' + data.questionName + '</p>';
+		
+		for (var i = 0; i < data.radioOptions.length; i++) {
+			questionString += '<input class="dynamic-input" type="radio" name="radio-option" value="'+data.radioOptions[i]+'"> ' + data.radioOptions[i] + '</input><br/>';
+		}
+
+		questionString += '</select><br><br><button id="dynamic-last-button">Done</button>';
+
+		$('body').on('click', '#dynamic-last-button', function(){
+			alert('you selected ' + $("input[type='radio'].dynamic-input:checked").val());
 		});
 
 	}
