@@ -1,11 +1,9 @@
-var Questions = []; // Rails ==> Question.all
+
+var Questions = []; 	// Rails ==> Question.all
 Questions[0] = {}; 		// Rails ==> Question.create() or Question.all.first
 
 
 $(document).ready(function(){
-
-var firebase = new Firebase('scorching-torch-8159.firebaseapp.com');
-var testQuestion = [];
 
 // Hide all elements except div#question-label
 $('.hide').hide();
@@ -95,9 +93,39 @@ $('#dropdown-num-options-submit').on('click', function() {
 	
 });
 
+// Radio buttons: fill in options 
+$('#radio-num-options-submit').on('click', function() {
+	// remove any already-created text boxes first
+	$('.dynamic-text-box').remove();
+	// find the num selected
+	var radioNumOptions = $("#radio-num-selected :selected").val();
+	Questions[0].radioOptionsNum  = radioNumOptions;
+	Questions[0].radioOptions = [];
+	console.log(radioNumOptions);
+	// append the amount of text boxes (with ID) and a submit button
+	for (var i = 0; i < radioNumOptions; i++) {
+		$('#radio-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
+	}
+
+	$('#radio-type').append("<button type='button' class='btn btn-default' id='radio-options-text-submit'>Submit</button>");
+
+	// Capture answers for radio upon click of submit button
+	$('#radio-options-text-submit').on('click', function() {
+		// Capture vals of text boxes
+		// Set them as options for the radio
+		$('.dynamic-text-box').each(function(i, el) {
+			Questions[0].radioOptions.push($(el).val());
+		});
+
+		generateForm(Questions[0]);
+	});
+	
+});
+
 
 }); //end document ready fxn
 
+// produces question upon submit
 function generateForm(data) {
 	var questionString = '';
 
@@ -121,6 +149,18 @@ function generateForm(data) {
 	} else if (data.questionType === 'checkbox') {
 
 	} else if (data.questionType === 'radio') {
+		questionString += '<p>' + data.questionName + '</p>';
+		questionString += '<select id="dynamic-last-select">'
+		
+		for (var i = 0; i < data.radioOptions.length; i++) {
+			questionString += '<option val="'+data.radioOptions[i]+'">' + data.radioOptions[i] + '</option>';
+		}
+
+		questionString += '</select><br><br><button id="dynamic-last-button">Done</button>';
+
+		$('body').on('click', '#dynamic-last-button', function(){
+			alert('you selected ' + $("#dynamic-last-select :selected").val());
+		});
 
 	}
 
