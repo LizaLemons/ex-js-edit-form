@@ -16,6 +16,16 @@ $(document).ready(function(){
 	$('.delete-btns').hide();
 	$('.save-btns').hide();
 
+	// Setup jQuery UI sortable/draggable
+	$('#sortable-container').sortable({
+		stop: function(){
+			var questionsInOrder = $('.draggable');
+			for (var i = 0; i < questionsInOrder.length; i++) {
+				$(questionsInOrder[i]).find('.dyn-num').html(i+1);
+			}
+		}
+	});
+
 	// Click "Edit Form" button
 	$('#edit-app-btn').on('click', function() {
 		$('.edit-btns').show();
@@ -29,10 +39,9 @@ $(document).ready(function(){
 		$('.delete-btns').hide();
 		$('.save-btns').show();
 		// Create input box:
-		$('<p>Edit Question #1:</p><input type="text" id="q1-text-edit">').prependTo('#append-edited-q');
-		$('#q1-text-edit').val('Name:');
+		$('<p>Edit Question #1:</p><input type="text" placeholder="Name:" id="q1-text-edit">').prependTo('#append-edited-q');
 		// Select question type
-		$('#append-edited-q').append('<br><br><div><radiogroup><input type="radio" name="question-type" value="dropdown" id="dropdown-selected"> Dropdown</input><br><input type="radio" name="question-type" value="text-box" id="text-area-selected"> Text Box</input><br><input type="radio" name="question-type" value="radio-buttons" id="radio-selected"> Radio Buttons</input><br><input type="radio" name="question-type" value="checkboxes" id="checkbox-selected"> Checkboxes</input></radiogroup></div><br>'); 
+		$('#append-edited-q').append('<br><br><p>Question Type: </p><div><radiogroup><input type="radio" name="question-type" value="dropdown" id="dropdown-selected"> Dropdown</input><br><input type="radio" name="question-type" value="text-box" id="text-area-selected"> Text Box</input><br><input type="radio" name="question-type" value="radio-buttons" id="radio-selected"> Radio Buttons</input><br><input type="radio" name="question-type" value="checkboxes" id="checkbox-selected"> Checkboxes</input></radiogroup></div><br>'); 
 
 		// if select "dropdown"
 
@@ -61,6 +70,8 @@ $(document).ready(function(){
 	// Hide all elements except div#question-label
 	$('.hide').hide();
 
+	////////////////////////////////////////
+	
 	// Capture question name upon submit
 	$('#question-label-submit').on('click', function() {
 		Questions[0].questionName = $('#question-name-text').val();
