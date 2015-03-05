@@ -21,9 +21,8 @@
 
 <body>
 	
-
 	<div class="container">
-		<h1>NYC Student Application</h1>
+		<h1>Student Application for NYC</h1>
 	</div>
 	<div class="container" id="html_form">
 		<!-- ///////////////  HTML Form  /////////////////// -->
@@ -39,15 +38,78 @@
 				<div id="q1-buttons">	
 					<div id="append-edited-q">
 						<!-- Append here -->
+
+						<!-- Dropdown | Select number of options -->
+						<div id="dropdown-type" class="hide">
+							<p>Dropdown:</p>
+							<select id="dropdown-num-selected">
+							<option disabled selected>Select number of options</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							</select>
+							<br>
+							<button type="button" class="btn btn-default" id="dropdown-num-options-submit">Submit</button>
+							<br>
+							<br>
+						</div>
+
+						<br>
+
+						<br>
+				
+						<!-- Text area -->
+						<div id="text-area-type" class="hide">
+							<p>Text box:</p>
+							<textarea id="msg"></textarea>
+						</div>
+
+						<br>
+						
+						<!-- Radio | Select number of options -->
+						<div id="radio-type" class="hide">
+							<p>Radio Buttons: Select number of options</p>
+							<select id="radio-num-selected">
+							  <option disabled selected>Select number of options</option>
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							</select>
+							<br>
+							<button type="button" class="btn btn-default" id="radio-num-options-submit">Submit</button>
+							<br>
+							<br>
+						</div>
+
+						<!-- Checkbox -->
+						<div id="checkbox-type" class="hide">
+							<p>Checkboxes: Select number of options</p>
+							<select id="checkbox-num-selected">
+							  <option disabled selected>Select number of options</option>
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							</select>
+							<br>
+							<button type="button" class="btn btn-default" id="checkbox-num-options-submit">Submit</button>
+							<br>
+							<br>
+						</div>
+						
+						<br>
+
 					</div>
 
 					<button type="button" class="btn btn-default edit-btns" id="edit-1">Edit</button>
 					<button type="button" class="btn btn-default delete-btns" id="delete-1">Delete</button>
 					<button type="button" class="btn btn-default save-btns" id="save-1">Save</button>
 				</div>
+			<br>
 			</li>	
 			
-			<br>
 			
 			<li class="draggable">
 				<div id="q2">
@@ -133,9 +195,9 @@
 						<button type="button" class="btn btn-default delete-btns" id="">Delete</button>
 					</div>
 				</div>
+			<br>
 			</li>
 			
-			<br>
 			
 			<li class="draggable">
 				<div id="q3">
@@ -158,9 +220,9 @@
 					<button type="button" class="btn btn-default edit-btns" id="">Edit</button>
 					<button type="button" class="btn btn-default delete-btns" id="">Delete</button>
 				</div>
+			<br>
 			</li>
 
-			<br>
 
 			<li class="draggable">
 				<div id="4">
@@ -174,9 +236,9 @@
 					<button type="button" class="btn btn-default edit-btns" id="">Edit</button>
 					<button type="button" class="btn btn-default delete-btns" id="">Delete</button>
 				</div>
+			<br>
 			</li>
 			
-			<br>
 			<br>
 			
 			<button type="button" class="btn btn-default" id="edit-app-btn">Edit Application</button>
@@ -194,7 +256,7 @@
 			<br>
 
 			<!-- ///////////////  Question #1  /////////////////// -->
-			<div>
+			<div id="add-question">
 				<h1>Add a Question</h1>
 				<!-- #######  Question name ######## -->
 				<div id="question-label">
