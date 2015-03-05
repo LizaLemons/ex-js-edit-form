@@ -33,9 +33,15 @@ $(document).ready(function(){
 		$('.edit-btns').show();
 		$('.delete-btns').show();
 		$('#edit-app-btn').hide(); 
+		$('<button type="button" class="btn btn-default" id="add-q-btn">Add Question</button><br><br>').appendTo('#sortable-container');
 		$('<button type="button" class="btn btn-default" id="save-app-btn">Save</button>').appendTo('#sortable-container');
-		$('#add-question').show(); 
+
+		// Click 'Add Question' button, show Add Question section
+		$('#add-q-btn').on('click', function() {
+			$('#add-question').show();
+		});
 	});
+
 
 	// Click "Edit Question #1" button
 	$('#edit-1').on('click', function() {
