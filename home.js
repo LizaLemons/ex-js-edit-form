@@ -1,155 +1,208 @@
 
+
 var Questions = []; 	// Rails ==> Question.all
 Questions[0] = {}; 		// Rails ==> Question.create() or Question.all.first
+
+//// To do:
+// Hide "Add Question" functionality  
+// Add "Add Question" button
+// 
 
 
 $(document).ready(function(){
 
-// Hide all elements except div#question-label
-$('.hide').hide();
+	// Initially hide edit/delete/save buttons 
+	$('.edit-btns').hide();
+	$('.delete-btns').hide();
+	$('.save-btns').hide();
 
-// Capture question name upon submit
-$('#question-label-submit').on('click', function() {
-	Questions[0].questionName = $('#question-name-text').val();
-});
-
-// Choose question input type 
-$('#question-label-submit').on('click', function() {
-	$('#question-type').removeClass('hide');
-	$('#question-type').show("slow");
-});
-
-// Show selected input type / hide other options
-$('#dropdown-selected').on('click', function() {
-	Questions[0].questionType = 'dropdown';
-	console.log('Dropdown selected');
-	$('#dropdown-type').removeClass('hide');
-	$('#dropdown-type').show("slow"); 
-	// hide other 3 options
-	$('#text-area-type').addClass('hide');
-	$('#radio-type').addClass('hide');
-	$('#checkbox-type').addClass('hide');
-});
-
-$('#text-area-selected').on('click', function() {
-	Questions[0].questionType = 'textarea';
-	console.log('Text box selected');
-	$('#text-area-type').removeClass('hide');
-	$('#text-area-type').show("slow"); 
-	// hide other 3 options
-	$('#dropdown-type').addClass('hide');
-	$('#radio-type').addClass('hide');
-	$('#checkbox-type').addClass('hide');
-});
-
-$('#radio-selected').on('click', function() {
-	Questions[0].questionType = 'radio';
-	console.log('Radio selected');
-	$('#radio-type').removeClass('hide');
-	$('#radio-type').show("slow"); 
-	// hide other 3 options
-	$('#text-area-type').addClass('hide');
-	$('#dropdown-type').addClass('hide');
-	$('#checkbox-type').addClass('hide');
-});
-
-$('#checkbox-selected').on('click', function() {
-	Questions[0].questionType = 'checkbox';
-	console.log('Checkbox selected');
-	$('#checkbox-type').removeClass('hide');
-	$('#checkbox-type').show("slow"); 
-	// hide other 3 options
-	$('#text-area-type').addClass('hide');
-	$('#radio-type').addClass('hide');
-	$('#dropdown-type').addClass('hide');
-});
-
-// Dropdown: fill in options 
-$('#dropdown-num-options-submit').on('click', function() {
-	// remove any already-created text boxes first
-	$('.dynamic-text-box').remove();
-	// find the num selected
-	var drpdwnNumOptions = $("#dropdown-num-selected :selected").val();
-	Questions[0].dropdownOptionsNum  = drpdwnNumOptions;
-	Questions[0].dropdownOptions = [];
-	console.log(drpdwnNumOptions);
-	// append the amount of text boxes (with ID) and a submit button
-	for (var i = 0; i < drpdwnNumOptions; i++) {
-		$('#dropdown-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
-	}
-
-	$('#dropdown-type').append("<button type='button' class='btn btn-default' id='dropdown-options-text-submit'>Submit</button>");
-
-	// Capture answers for dropdown upon click of submit button
-	$('#dropdown-options-text-submit').on('click', function() {
-		// Capture vals of text boxes
-		// Set them as options for the dropdown
-		$('.dynamic-text-box').each(function(i, el) {
-			Questions[0].dropdownOptions.push($(el).val());
-		});
-
-		generateForm(Questions[0]);
+	// Click "Edit Form" button
+	$('#edit-app-btn').on('click', function() {
+		$('.edit-btns').show();
+		$('.delete-btns').show();
 	});
+
+	// Click "Edit Question #1" button
+	$('#edit-1').on('click', function() {
+		$('#q1').hide();
+		$('.edit-btns').hide();
+		$('.delete-btns').hide();
+		$('.save-btns').show();
+		// Create input box:
+		$('<p>Edit Question #1:</p><input type="text" id="q1-text-edit">').prependTo('#append-edited-q');
+		$('#q1-text-edit').val('Name:');
+		// Select question type
+		$('#append-edited-q').append('<br><br><div><radiogroup><input type="radio" name="question-type" value="dropdown" id="dropdown-selected"> Dropdown</input><br><input type="radio" name="question-type" value="text-box" id="text-area-selected"> Text Box</input><br><input type="radio" name="question-type" value="radio-buttons" id="radio-selected"> Radio Buttons</input><br><input type="radio" name="question-type" value="checkboxes" id="checkbox-selected"> Checkboxes</input></radiogroup></div><br>'); 
+
+		// if select "dropdown"
+
+		// if select "textbox"
+		
+		// if select "checkboxes"
+		
+		// if select "radio"
+		
 	
-});
+	})
 
-// Radio buttons: fill in options 
-$('#radio-num-options-submit').on('click', function() {
-	// remove any already-created text boxes first
-	$('.dynamic-text-box').remove();
-	// find the num selected
-	var radioNumOptions = $("#radio-num-selected :selected").val();
-	Questions[0].radioOptionsNum  = radioNumOptions;
-	Questions[0].radioOptions = [];
-	console.log(radioNumOptions);
-	// append the amount of text boxes (with ID) and a submit button
-	for (var i = 0; i < radioNumOptions; i++) {
-		$('#radio-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
-	}
 
-	$('#radio-type').append("<button type='button' class='btn btn-default' id='radio-options-text-submit'>Submit</button>");
+	// Save the edited name 
+	$('#save-1').on('click', function() {
+		var q1_edit = $('#q1-text-edit').val();
+		alert(q1_edit); 
 
-	// Capture answers for radio upon click of submit button
-	$('#radio-options-text-submit').on('click', function() {
-		// Capture vals of text boxes
-		// Set them as options for the radio
-		$('.dynamic-text-box').each(function(i, el) {
-			Questions[0].radioOptions.push($(el).val());
-		});
-
-		generateForm(Questions[0]);
 	});
-	
-});
 
-// Checkbox buttons: fill in options 
-$('#checkbox-num-options-submit').on('click', function() {
-	// remove any already-created text boxes first
-	$('.dynamic-text-box').remove();
-	// find the num selected
-	var checkboxNumOptions = $("#checkbox-num-selected :selected").val();
-	Questions[0].checkboxOptionsNum  = checkboxNumOptions;
-	Questions[0].checkboxOptions = [];
-	console.log(checkboxNumOptions);
-	// append the amount of text boxes (with ID) and a submit button
-	for (var i = 0; i < checkboxNumOptions; i++) {
-		$('#checkbox-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
-	}
 
-	$('#checkbox-type').append("<button type='button' class='btn btn-default' id='checkbox-options-text-submit'>Submit</button>");
 
-	// Capture answers for checkbox upon click of submit button
-	$('#checkbox-options-text-submit').on('click', function() {
-		// Capture vals of text boxes
-		// Set them as options for the checkbox
-		$('.dynamic-text-box').each(function(i, el) {
-			Questions[0].checkboxOptions.push($(el).val());
-		});
+///////////////////////////////////////////////////////
 
-		generateForm(Questions[0]);
+
+	// Hide all elements except div#question-label
+	$('.hide').hide();
+
+	// Capture question name upon submit
+	$('#question-label-submit').on('click', function() {
+		Questions[0].questionName = $('#question-name-text').val();
 	});
-	
-});
+
+	// Choose question input type 
+	$('#question-label-submit').on('click', function() {
+		$('#question-type').removeClass('hide');
+		$('#question-type').show("slow");
+	});
+
+	// Show selected input type / hide other options
+	$('#dropdown-selected').on('click', function() {
+		Questions[0].questionType = 'dropdown';
+		console.log('Dropdown selected');
+		$('#dropdown-type').removeClass('hide');
+		$('#dropdown-type').show("slow"); 
+		// hide other 3 options
+		$('#text-area-type').addClass('hide');
+		$('#radio-type').addClass('hide');
+		$('#checkbox-type').addClass('hide');
+	});
+
+	$('#text-area-selected').on('click', function() {
+		Questions[0].questionType = 'textarea';
+		console.log('Text box selected');
+		$('#text-area-type').removeClass('hide');
+		$('#text-area-type').show("slow"); 
+		// hide other 3 options
+		$('#dropdown-type').addClass('hide');
+		$('#radio-type').addClass('hide');
+		$('#checkbox-type').addClass('hide');
+	});
+
+	$('#radio-selected').on('click', function() {
+		Questions[0].questionType = 'radio';
+		console.log('Radio selected');
+		$('#radio-type').removeClass('hide');
+		$('#radio-type').show("slow"); 
+		// hide other 3 options
+		$('#text-area-type').addClass('hide');
+		$('#dropdown-type').addClass('hide');
+		$('#checkbox-type').addClass('hide');
+	});
+
+	$('#checkbox-selected').on('click', function() {
+		Questions[0].questionType = 'checkbox';
+		console.log('Checkbox selected');
+		$('#checkbox-type').removeClass('hide');
+		$('#checkbox-type').show("slow"); 
+		// hide other 3 options
+		$('#text-area-type').addClass('hide');
+		$('#radio-type').addClass('hide');
+		$('#dropdown-type').addClass('hide');
+	});
+
+	// Dropdown: fill in options 
+	$('#dropdown-num-options-submit').on('click', function() {
+		// remove any already-created text boxes first
+		$('.dynamic-text-box').remove();
+		// find the num selected
+		var drpdwnNumOptions = $("#dropdown-num-selected :selected").val();
+		Questions[0].dropdownOptionsNum  = drpdwnNumOptions;
+		Questions[0].dropdownOptions = [];
+		console.log(drpdwnNumOptions);
+		// append the amount of text boxes (with ID) and a submit button
+		for (var i = 0; i < drpdwnNumOptions; i++) {
+			$('#dropdown-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
+		}
+
+		$('#dropdown-type').append("<button type='button' class='btn btn-default' id='dropdown-options-text-submit'>Submit</button>");
+
+		// Capture answers for dropdown upon click of submit button
+		$('#dropdown-options-text-submit').on('click', function() {
+			// Capture vals of text boxes
+			// Set them as options for the dropdown
+			$('.dynamic-text-box').each(function(i, el) {
+				Questions[0].dropdownOptions.push($(el).val());
+			});
+
+			generateForm(Questions[0]);
+		});
+		
+	});
+
+	// Radio buttons: fill in options 
+	$('#radio-num-options-submit').on('click', function() {
+		// remove any already-created text boxes first
+		$('.dynamic-text-box').remove();
+		// find the num selected
+		var radioNumOptions = $("#radio-num-selected :selected").val();
+		Questions[0].radioOptionsNum  = radioNumOptions;
+		Questions[0].radioOptions = [];
+		console.log(radioNumOptions);
+		// append the amount of text boxes (with ID) and a submit button
+		for (var i = 0; i < radioNumOptions; i++) {
+			$('#radio-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
+		}
+
+		$('#radio-type').append("<button type='button' class='btn btn-default' id='radio-options-text-submit'>Submit</button>");
+
+		// Capture answers for radio upon click of submit button
+		$('#radio-options-text-submit').on('click', function() {
+			// Capture vals of text boxes
+			// Set them as options for the radio
+			$('.dynamic-text-box').each(function(i, el) {
+				Questions[0].radioOptions.push($(el).val());
+			});
+
+			generateForm(Questions[0]);
+		});
+		
+	});
+
+	// Checkbox buttons: fill in options 
+	$('#checkbox-num-options-submit').on('click', function() {
+		// remove any already-created text boxes first
+		$('.dynamic-text-box').remove();
+		// find the num selected
+		var checkboxNumOptions = $("#checkbox-num-selected :selected").val();
+		Questions[0].checkboxOptionsNum  = checkboxNumOptions;
+		Questions[0].checkboxOptions = [];
+		console.log(checkboxNumOptions);
+		// append the amount of text boxes (with ID) and a submit button
+		for (var i = 0; i < checkboxNumOptions; i++) {
+			$('#checkbox-type').append("<textarea class='dynamic-text-box' id='box"+ i +"'</textarea>");
+		}
+
+		$('#checkbox-type').append("<button type='button' class='btn btn-default' id='checkbox-options-text-submit'>Submit</button>");
+
+		// Capture answers for checkbox upon click of submit button
+		$('#checkbox-options-text-submit').on('click', function() {
+			// Capture vals of text boxes
+			// Set them as options for the checkbox
+			$('.dynamic-text-box').each(function(i, el) {
+				Questions[0].checkboxOptions.push($(el).val());
+			});
+
+			generateForm(Questions[0]);
+		});
+		
+	});
 
 
 }); //end document ready fxn
